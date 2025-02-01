@@ -7,6 +7,9 @@ import {
   Put,
   Param,
   Delete,
+  UnauthorizedException,
+  ParseIntPipe,
+  HttpStatus,
 } from '@nestjs/common';
 import { CreateCatDto } from './dto/create-cat.dto';
 import { UpdateCatDto } from './dto/update-cat.dto';
@@ -20,6 +23,11 @@ export class CatsController {
   @Get()
   findAll() {
     return this.catService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.catService.findOne(id);
   }
 
   @Post()
